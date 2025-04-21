@@ -1,0 +1,68 @@
+{
+  "enemies": [
+    {
+      "name": "slime",
+      "level": 1,
+      "max_health": 30,
+      "attack": 5,
+      "defense": 2,
+      "sprite_name": "slime_sprite"
+    },
+    {
+      "name": "goblin",
+      "level": 2,
+      "max_health": 40,
+      "attack": 8,
+      "defense": 3,
+      "sprite_name": "goblin_sprite"
+    },
+    {
+      "name": "skeleton",
+      "level": 5,
+      "max_health": 80,
+      "attack": 15,
+      "defense": 2,
+      "sprite_name": "skeleton_sprite"
+    },
+    {
+      "name": "ogre",
+      "level": 7,
+      "max_health": 140,
+      "attack": 6,
+      "defense": 10,
+      "sprite_name": "ogre_sprite"
+    },
+    {
+      "name": "elemental",
+      "level": 10,
+      "max_health": 200,
+      "attack": 20,
+      "defense": 15,
+      "sprite_name": "elemental_sprite"
+    },
+    {
+      "name": "witch",
+      "level": 9,
+      "max_health": 80,
+      "attack": 15,
+      "defense": 2,
+      "sprite_name": "witch_sprite"
+    },
+    {
+      "name": "paladin",
+      "level": 15,
+      "max_health": 250,
+      "attack": 10,
+      "defense": 30,
+      "sprite_name": "paladin_sprite"
+    },
+    {
+      "name": "golem",
+      "level": 10,
+      "max_health": 400,
+      "attack": 10,
+      "defense": 50,
+      "sprite_name": "golem_sprite"
+    }
+  ]
+}

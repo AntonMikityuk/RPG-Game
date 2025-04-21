@@ -1,0 +1,28 @@
+{
+  "common": [
+    {
+      "Event_name": "Casual fight",
+      "Event_description": "You meet wounded goblin.",
+      "Event_tag": "combat",
+      "Enemy_type": "goblin"
+    }
+  ],
+  "rare": [
+  ],
+  "epic": [
+    {
+      "Event_name": "Challenge",
+      "Event_description": "You encounter massive gates, blocking your path, as you approache them you hear loud voice, challenging you to enter the room and defeat powerfull enemies.",
+      "Event_tag": "combat",
+      "Enemy_type": "slime"
+    }
+  ],
+  "special": [
+    {
+      "Event_name": "Boss",
+      "Event_description": "You enter large room and see massive enemy in the middle - boss of this level.",
+      "Event_tag": "combat",
+      "Enemy_type": "goblin"
+    }
+  ]
+}
