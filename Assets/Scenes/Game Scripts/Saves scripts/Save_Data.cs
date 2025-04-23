@@ -6,6 +6,8 @@ public class Save_Data
 {
     public string heroname;
     public int level;
+    public int cur_exp;
+    public int required_exp;
 
     public int maxhealth;
     public int curhealth;
@@ -27,6 +29,8 @@ public class Save_Data
     {
         heroname = hero.hero_name;
         level = hero.level;
+        cur_exp = hero.cur_exp;
+        required_exp = hero.required_exp;
 
         maxhealth = hero.max_health;
         curhealth = hero.cur_health;

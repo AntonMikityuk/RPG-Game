@@ -6,11 +6,13 @@ using UnityEngine;
 public class Event_System : MonoBehaviour
 {
     /*Списки с ивентами*/
+    [Header("Events Lists")]
     public List<Event> Common_Events;
     public List<Event> Rare_Events;
     public List<Event> Epic_Events;
     public List<Event> Special_Events;
 
+    /*Загрузка ивентов при запуске окна игры*/
     private void Awake()
     {
         Load_Events();
@@ -91,6 +93,7 @@ public class Event_System : MonoBehaviour
             Debug.Log($"Name: {Event.Event_name}, Description: {Event.Event_description}, Tag: {Event.Event_tag}, enemy type: {Event.Enemy_type}");
         }
     }
+    /*Получение рандомного ивента*/
     public Event GetRandom_Event(List<Event> Event_list)
     {
         if (Event_list.Count == 0 || Event_list == null)

@@ -28,8 +28,11 @@ public class Hero : MonoBehaviour
     }
 
     public string hero_name = "Adventurer";
- 
+
+    [Header("Exp and Level")]
     public int level;
+    public int cur_exp;
+    public int required_exp;
 
     [Header("HP and Mana")]
     public int max_health;
@@ -47,6 +50,7 @@ public class Hero : MonoBehaviour
     public int intelligence;
     public int luck;
 
+    [Header("Gold and Floors")]
     public int gold;
     public int floors;
 
@@ -78,14 +82,17 @@ public class Hero : MonoBehaviour
         Debug.Log($"You have restored {mana_amount} mana");
     }
 
+    /*Подсчет получаемого урона*/
     public int Calculate_Damage(int damage)
     {
         return damage - defense;
     }
+    /*Подсчет получаемого лечения*/
     public int Calculate_Heal(int intelligence)
     {
         return intelligence * 5;
     }
+    /*Подсчет восстанавливаемой маны*/
     public int Calculate_ManaRestoretaion(int intelligence)
     {
         return intelligence * 3;
@@ -94,13 +101,18 @@ public class Hero : MonoBehaviour
     /*Повышение уровня*/
     public void Level_up()
     {
-        level++;
-        Increase_strength(2);
-        Increase_dexterity(1);
-        Increase_intelligence(3);
-        Increase_luck(5);
-        Update_stats();
-        Debug.Log("Level up!");
+        while (cur_exp >= required_exp)
+        {
+            level++;
+            cur_exp -= required_exp;
+            required_exp += 30;
+            Increase_strength(2);
+            Increase_dexterity(1);
+            Increase_intelligence(3);
+            Increase_luck(5);
+            Update_stats();
+            Debug.Log("Level up!");
+        }
 
         Game_Management manager = FindObjectOfType<Game_Management>();
         if (manager != null)
@@ -162,6 +174,8 @@ public class Hero : MonoBehaviour
 
         hero_name = data.heroname;
         level = data.level;
+        cur_exp = data.cur_exp;
+        required_exp = data.required_exp;
 
         max_health = data.maxhealth;
         cur_health = data.curhealth;

@@ -17711,7 +17711,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero_name: Adventurer
-  level: 5
+  level: 1
+  cur_exp: 0
+  required_exp: 30
   max_health: 50
   cur_health: 40
   max_mana: 50
@@ -17723,7 +17725,7 @@ MonoBehaviour:
   intelligence: 7
   luck: 1
   gold: 15
-  floors: 2
+  floors: 1
 --- !u!4 &1972915245
 Transform:
   m_ObjectHideFlags: 0

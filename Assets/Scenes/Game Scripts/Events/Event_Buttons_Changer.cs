@@ -110,4 +110,10 @@ public class Event_Buttons_Changer : MonoBehaviour
                 return Resources.Load<Sprite>("Icons/default_icon");
         }
     }
+    /*Рерол ивентов при переходе на новый этаж*/
+    public void RollNewFloor_Events()
+    {
+        Debug.Log("Rolling new events");
+        Roll_events();
+    }
 }

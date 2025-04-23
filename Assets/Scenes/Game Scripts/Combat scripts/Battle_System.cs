@@ -15,14 +15,14 @@ public class Battle_System : MonoBehaviour
     
     private bool battleStartClicked = false;
     private string selectedAction;
-
+    
     public enum Event_Tier {Common, Rare, Epic, Special }
     private Event_Tier Current_Tier;
     public void SetCurrent_EventTier(Event_Tier tier)
     {
         Current_Tier = tier;
     }
-
+    /*Начало битвы*/
     public void StartBattle()
     {
         Player_Hero = FindObjectOfType<Hero>();
@@ -36,7 +36,7 @@ public class Battle_System : MonoBehaviour
 
         StartCoroutine(Setup_Battle());
     }
-
+    /*Инициализация битвы*/
     private IEnumerator Setup_Battle()
     {
         Debug.Log($"Battle is starting! Enemy: {Enemy.unitName}");
@@ -51,7 +51,7 @@ public class Battle_System : MonoBehaviour
         State = Battle_States.PLAYER_TURN;
         PlayerTurn();
     }
-
+    /*Ход игрока*/
     private void PlayerTurn()
     {
         Debug.Log("Player turn, choose action");
@@ -59,7 +59,7 @@ public class Battle_System : MonoBehaviour
         CombatUI.Show_Actions_Panel();
         CombatUI.Show_Heroes_Panel();
     }
-
+    /*После выбора действия*/
     public void OnPlayerChooseAction(string action)
     {
         if (State != Battle_States.SELECT_ACTION) return;
@@ -69,7 +69,7 @@ public class Battle_System : MonoBehaviour
         
         State = Battle_States.SELECT_HERO;
     }
-
+    /*После выбора героя*/
     public void OnHeroSelected()
     {
         if (State != Battle_States.SELECT_HERO) return;
@@ -94,7 +94,7 @@ public class Battle_System : MonoBehaviour
             CombatUI.Show_Enemies_Panel();
         }
     }
-
+    /*После выбора противника*/
     public void OnEnemySelected()
     {
         if (State != Battle_States.SELECT_ENEMY) return;
@@ -105,7 +105,7 @@ public class Battle_System : MonoBehaviour
 
         StartCoroutine(ExecutePlayerAction());
     }
-
+    /*Завершение хода игрока*/
     private IEnumerator ExecutePlayerAction()
     {
         CombatUI.Clear_DialoguePanel();
@@ -124,7 +124,7 @@ public class Battle_System : MonoBehaviour
             yield return StartCoroutine(Player_RestoreMana());
         }
     }
-
+    /*Атака игрока*/
     private IEnumerator Player_Attack()
     {
         Debug.Log("Player attacks!");
@@ -144,7 +144,7 @@ public class Battle_System : MonoBehaviour
             StartCoroutine(EnemyTurn());
         }
     }
-
+    /*Лечение*/
     private IEnumerator Player_Heal()
     {
         Debug.Log("Player heals");
@@ -156,7 +156,7 @@ public class Battle_System : MonoBehaviour
         State = Battle_States.ENEMY_TURN;
         StartCoroutine(EnemyTurn());
     }
-
+    /*Восстановление маны*/
     private IEnumerator Player_RestoreMana()
     {
         Debug.Log("Player restores mana");
@@ -168,7 +168,7 @@ public class Battle_System : MonoBehaviour
         State = Battle_States.ENEMY_TURN;
         StartCoroutine(EnemyTurn());
     }
-
+    /*Ход противника*/
     private IEnumerator EnemyTurn()
     {
         Debug.Log("Enemy turn...");
@@ -191,21 +191,22 @@ public class Battle_System : MonoBehaviour
             PlayerTurn();
         }
     }
-
+    /*Завершение битвы*/
     private IEnumerator EndBattle()
     {
         if (State == Battle_States.WIN)
         {
             Debug.Log("You won!");
             CombatUI.Clear_DialoguePanel();
-            //CombatUI.Show_DialoguePanel();
-            //CombatUI.Hide_Actions_Panel();
             CombatWindow_Typer.StartTyping($"You won!", Text_Typer.Dialogue_Mode.Combat);
             yield return new WaitForSeconds(5f);
             if (Enemy != null)
                 Destroy(Enemy.gameObject);
             Game_Management manager = FindObjectOfType <Game_Management>();
             Reward();
+            Player_Hero.floors++;
+            Event_Buttons_Changer Event_changer = FindObjectOfType<Event_Buttons_Changer>();
+            Event_changer.RollNewFloor_Events();
             manager.Update_UI_Stats();
             CombatWindow_Typer.GameWindowDialoguePanel_text.text = "";
         }
@@ -232,16 +233,25 @@ public class Battle_System : MonoBehaviour
         switch (Current_Tier)
         {
             case Event_Tier.Common:
-                Debug.Log("Common tier reward: 10 gold");
+                Debug.Log("Common tier reward: 10 gold, 20 exp");
                 Player_Hero.gold += 10;
+                Player_Hero.cur_exp += 20;
+                if (Player_Hero.cur_exp >= Player_Hero.required_exp)
+                    Player_Hero.Level_up();
                 break;
             case Event_Tier.Rare:
-                Debug.Log("Rare tier reward: 30 gold");
+                Debug.Log("Rare tier reward: 30 gold, 50 exp");
                 Player_Hero.gold += 30;
+                Player_Hero.cur_exp += 50;
+                if (Player_Hero.cur_exp >= Player_Hero.required_exp)
+                    Player_Hero.Level_up();
                 break;
             case Event_Tier.Epic:
-                Debug.Log("Epic tier reward: 50 gold");
+                Debug.Log("Epic tier reward: 50 gold, 100 exp");
                 Player_Hero.gold += 50;
+                Player_Hero.cur_exp += 100;
+                if (Player_Hero.cur_exp >= Player_Hero.required_exp)
+                    Player_Hero.Level_up();
                 break;
         }
     }
