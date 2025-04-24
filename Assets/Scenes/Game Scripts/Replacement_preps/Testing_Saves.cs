@@ -10,7 +10,7 @@ public class Testing_Saves : MonoBehaviour
 {
     public static Testing_Saves Instance { get; private set; }
 
-    private Hero hero = FindObjectOfType<Hero>();
+    //private Hero hero = FindObjectOfType<Hero>();
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class Testing_Saves : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (hero != null)
+       // if (hero != null)
         {
             Debug.Log("hero not found");
             return;

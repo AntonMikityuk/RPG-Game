@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class Game_Management : MonoBehaviour
 {
+    [Header("Player Hero")]
     public Hero Player_hero;
-
+    /*Обновление статов персонажа при запуске*/
     void Start()
     {
         if (Player_hero != null)
@@ -48,9 +49,11 @@ public class Game_Management : MonoBehaviour
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Additive);
     }
     /*Панель меню*/
+    [Header("Panels")]
     public GameObject Menu_panel;
 
     /*Группа Canvas для блокировки*/
+    [Header("Canvas Group")]
     public CanvasGroup Game_UI;
 
     /*Блокировка игрового окна при открытии меню*/
@@ -64,6 +67,7 @@ public class Game_Management : MonoBehaviour
         Game_UI.blocksRaycasts = !isPaused;
     }
     /*Поля для отображения статов персонажа в меню персонажа*/
+    [Header("Hero Stats")]
     public TMP_Text name_text;
     public TMP_Text level_text;
     public TMP_Text strength_text;

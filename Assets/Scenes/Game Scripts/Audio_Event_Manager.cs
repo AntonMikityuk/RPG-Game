@@ -30,8 +30,11 @@ public class SceneAudioEventManager : MonoBehaviour
 
     public void UpdateActiveComponents()
     {
-        EventSystem[] eventSystems = FindObjectsOfType<EventSystem>(true);
-        AudioListener[] audioListeners = FindObjectsOfType<AudioListener>(true);
+        // Используем FindObjectsByType для поиска ВСЕХ объектов, включая неактивные
+        // FindObjectsInactive.Include соответствует старому параметру 'true'
+        // FindObjectsSortMode.None означает, что порядок не важен (обычно самый быстрый вариант)
+        EventSystem[] eventSystems = FindObjectsByType<EventSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        AudioListener[] audioListeners = FindObjectsByType<AudioListener>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         // Получаем список всех активных сцен
         List<Scene> activeScenes = new List<Scene>();
@@ -41,19 +44,42 @@ public class SceneAudioEventManager : MonoBehaviour
         }
 
         // Определяем, какая сцена сейчас "главная" (влияет на интерфейс)
-        bool isSaveMenuOpen = activeScenes.Exists(s => s.name == "Save Menu");
-        Scene mainScene = isSaveMenuOpen ? SceneManager.GetSceneByName("Main Menu") : SceneManager.GetActiveScene();
+        // Предполагаем, что сцена "Save Menu" загружается аддитивно
+        bool isSaveMenuOpen = activeScenes.Exists(s => s.name == "Save Menu" && s.isLoaded); // Добавил проверку isLoaded для надежности
+        
+        Scene targetScene; // Сцена, компоненты которой должны быть активны
+
+        // Если открыто меню сохранения, ищем сцену "Main Menu"
+        if (isSaveMenuOpen)
+        {
+            targetScene = SceneManager.GetSceneByName("Main Menu");
+        }
+        else // Иначе используем текущую активную сцену
+        {
+             targetScene = SceneManager.GetActiveScene();
+        }
 
         // Переключаем Event System
         foreach (EventSystem es in eventSystems)
         {
-            es.gameObject.SetActive(es.gameObject.scene == mainScene);
+            // Проверяем, что gameObject не null и сцена, к которой он принадлежит, валидна
+            if (es != null && es.gameObject != null && es.gameObject.scene.IsValid())
+            {
+                // Активируем EventSystem только если он принадлежит целевой сцене
+                es.gameObject.SetActive(es.gameObject.scene == targetScene);
+            }
         }
 
         // Переключаем Audio Listener
         foreach (AudioListener al in audioListeners)
         {
-            al.enabled = al.gameObject.scene == mainScene;
+             // Проверяем, что gameObject не null и сцена, к которой он принадлежит, валидна
+            if (al != null && al.gameObject != null && al.gameObject.scene.IsValid())
+            {
+                // Включаем AudioListener только если он принадлежит целевой сцене
+                // Используем al.enabled вместо SetActive, так как AudioListener - это компонент
+                al.enabled = (al.gameObject.scene == targetScene);
+            }
         }
     }
 }

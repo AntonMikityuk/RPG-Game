@@ -5,15 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Saves_Slot_Button : MonoBehaviour
 {
+    /*Персонаж игрока*/
     private Hero hero;
+    [Header("Slots")]
     public int Slot;
+    /*Поиск персонажа при старте скрипта*/
     private void Awake()
     {
         hero = Hero.Instance;
     }
+    /*Обработчик нажатия на слот сохранения*/
     public void OnSlot_clicked()
     {
-        Saves_Manager menuManager = FindObjectOfType<Saves_Manager>();
+        Saves_Manager menuManager = FindAnyObjectByType<Saves_Manager>();
         if (menuManager == null)
         {
             Debug.LogError("Save_Menu_Manager не найден!");

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*Если находимся в редакторе*/
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class Navigation_Manager : MonoBehaviour
 {
     public enum Navigation_mode { Save, Load }
@@ -55,5 +60,20 @@ public class Navigation_Manager : MonoBehaviour
         Navigation_Manager.cur_mode = Navigation_Manager.Navigation_mode.Load;
         Hero_Loader.To_Load = true;
     }
+    /*Выход из приложения*/
+    public void QuitGame()
+    {
+        Debug.Log("Game Quit");
 
+        PlayerPrefs.SetInt("Game_Proper_Exit", 1);
+        PlayerPrefs.Save(); 
+
+        #if UNITY_EDITOR
+
+        EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+            Debug.Log("Quitting Application (Build).");
+        #endif
+    }
 }

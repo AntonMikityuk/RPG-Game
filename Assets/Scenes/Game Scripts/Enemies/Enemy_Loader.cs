@@ -5,15 +5,18 @@ using System.IO;
 
 public class EnemyLoader : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Базовый префаб врага
+    [Header("Enemy prefab")]
+    public GameObject enemyPrefab;
+    [Header("Enemy List")]
     public List<EnemyData> enemyList;
-
+    [Header("Enemy Spawn Point")]
+    public Transform EnemySpawn_Point;
+    /*Загрузка врагов при старте*/
     private void Start()
     {
         LoadEnemies();
-       // SpawnEnemy(0); // Спавним первого врага для теста
     }
-
+    /*Загрузка противников из файла*/
     private void LoadEnemies()
     {
         Debug.Log("[EnemyLoader] LoadEnemies() called");
@@ -52,17 +55,36 @@ public class EnemyLoader : MonoBehaviour
             Debug.Log($"- {enemy.name} | Level: {enemy.level} | HP: {enemy.max_health} | ATK: {enemy.attack} | DEF: {enemy.defense}");
         }
     }
-
+    /*Спавн противника*/
     public void SpawnEnemy(int index)
     {
-        if (index < 0 || index >= enemyList.Count) return;
-
+        if (EnemySpawn_Point == null)
+        {
+            Debug.LogError("Enemy Spawn Point not assigned in EnemyLoader!");
+            return;
+        }
+        if (index < 0 || index >= enemyList.Count)
+        {
+            Debug.LogWarning($"[SpawnEnemy] Attempted spawn with wrong index: {index}. Available: {enemyList.Count} enemies.");
+            return;
+        }
         EnemyData data = enemyList[index];
-        GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        newEnemy.transform.localScale = new Vector3(30f, 30f, 10f);
-        Enemy_Unit enemyUnit = newEnemy.GetComponent<Enemy_Unit>();
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("Enemy Prefab not assigned in EnemyLoader!");
+            return;
+        }
+        GameObject newEnemy = Instantiate(enemyPrefab, EnemySpawn_Point.position, Quaternion.identity); // Используем enemySpawnPoint.position
+        newEnemy.transform.localScale = new Vector3(40f, 40f, 20f);
 
-        // Настраиваем характеристики
+        Enemy_Unit enemyUnit = newEnemy.GetComponent<Enemy_Unit>();
+        if (enemyUnit == null)
+        {
+            Debug.LogError($"Enemy prefab '{enemyPrefab.name}' does not contain Enemy_Unit!", enemyPrefab);
+            Destroy(newEnemy);
+            return;
+        }
+
         enemyUnit.unitName = data.name;
         enemyUnit.level = data.level;
         enemyUnit.max_health = data.max_health;
@@ -70,21 +92,19 @@ public class EnemyLoader : MonoBehaviour
         enemyUnit.attack = data.attack;
         enemyUnit.defense = data.defense;
 
-        // Загружаем спрайт
         Sprite enemySprite = Resources.Load<Sprite>($"Sprites/{data.sprite_name}");
         if (enemySprite != null)
         {
-            Debug.Log($"Sprite {enemySprite} loaded");
             enemyUnit.SetSprite(enemySprite);
         }
         else
         {
-            Debug.LogWarning("Sprite not loaded");
+            Debug.LogWarning($"Sprite not found by path: Sprites/{data.sprite_name}");
         }
-
-        Debug.Log($"[SpawnEnemy] {enemyUnit.name} created on position: {enemyUnit.transform.position}, sprite name: {enemyUnit.Sprite_Renderer}");
+        Debug.Log($"[SpawnEnemy] Enemy '{enemyUnit.unitName}' spawned on: {newEnemy.transform.position} (from spawn point: {EnemySpawn_Point.name}), sprite name: {data.sprite_name}");
     }
 
+    /*Поиск протиника*/
     public int Search_Enemy(string name)
     {
         foreach (var  enemy in enemyList)

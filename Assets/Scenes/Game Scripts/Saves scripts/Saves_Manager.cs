@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class Saves_Manager : MonoBehaviour
 {
+    [Header("Save Manager")]
     public static Saves_Manager Instance { get; private set; }
 
+    /*Создание неразрушаемого менеджера сохранений*/
     private void Start()
     {
         if (Instance == null)
@@ -86,7 +88,7 @@ public class Saves_Manager : MonoBehaviour
             {
                 Debug.Log("Hero.Instance найден, загружаем данные...");
                 Hero.Instance.ApplySaveData(data);
-                Game_Management Stats_updater = FindObjectOfType<Game_Management>();
+                Game_Management Stats_updater = FindAnyObjectByType<Game_Management>();
                 Stats_updater.Update_UI_Stats();
                 Debug.Log($"Hero after loading: Name={Hero.Instance.hero_name}, Level={Hero.Instance.level}, HP={Hero.Instance.cur_health}/{Hero.Instance.max_health}");
             }

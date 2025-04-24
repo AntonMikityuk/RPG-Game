@@ -100,7 +100,7 @@ public class Combat_Window_UI : MonoBehaviour
     /*Скрытие диалоговой панели при нажатии в окне битвы*/
     public void OnStartButtonClick()
     {
-        FindObjectOfType<Battle_System>().OnBattleStartClick();
+        FindAnyObjectByType<Battle_System>().OnBattleStartClick();
         Hide_DialoguePanel(); // Прячем диалог
     }
     /*Показать диалоговую панель*/

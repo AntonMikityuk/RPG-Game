@@ -6,8 +6,9 @@ using TMPro;
 [System.Serializable]
 public class Hero : MonoBehaviour
 {
+   /*Персонаж*/
     public static Hero Instance { get; private set; }
-
+    /*Создание персонажа при запуске скрипта*/
     private void Awake()
     {
         if (Instance == null)
@@ -27,6 +28,7 @@ public class Hero : MonoBehaviour
         }
     }
 
+    [Header("Hero Name")]
     public string hero_name = "Adventurer";
 
     [Header("Exp and Level")]
@@ -114,7 +116,7 @@ public class Hero : MonoBehaviour
             Debug.Log("Level up!");
         }
 
-        Game_Management manager = FindObjectOfType<Game_Management>();
+        Game_Management manager = FindAnyObjectByType<Game_Management>();
         if (manager != null)
         { 
             manager.Update_UI_Stats();

@@ -7,12 +7,16 @@ using Unity.VisualScripting;
 
 public class Event_Buttons_Changer : MonoBehaviour
 {
+    [Header("Event System")]
     public Event_System Event_Changer;
+    [Header("Text Typer")]
     public Text_Typer Text_Reference;
+    [Header("Windows")]
     public GameObject Combat_Window;
-
+    [Header("Combat Manager")]
     public Battle_System Combat_Manager;
 
+    /*Кнопки ивентов*/
     [System.Serializable]
     public class Event_Button
     {
@@ -21,10 +25,12 @@ public class Event_Buttons_Changer : MonoBehaviour
         public Image Event_Icon;
     }
 
+    [Header("Event Buttons")]
     public List<Event_Button> Event_buttons = new List<Event_Button>();
-
+    /*Списки ивентов*/
     private List<Event> Events_list = new List<Event>();
 
+    /*Ролл первых ивентов при запуске*/
     private void Start()
     {
         Debug.Log("[Event_Buttons_Changer] Start() called");
@@ -71,7 +77,7 @@ public class Event_Buttons_Changer : MonoBehaviour
         }
         if (Events_list[index].Event_tag == "combat")
         {
-             EnemyLoader Loader = FindObjectOfType<EnemyLoader>();
+             EnemyLoader Loader = FindAnyObjectByType<EnemyLoader>();
              if (Loader != null)
              {
                  int Enemy_index = Loader.Search_Enemy(Events_list[index].Enemy_type);

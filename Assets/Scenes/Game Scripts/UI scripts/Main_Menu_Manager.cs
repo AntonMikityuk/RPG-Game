@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu_Manager : MonoBehaviour
 {
+    [Header("Main Menu")]
     public GameObject Main_menu;
+    [Header("Saves Menu")]
     public GameObject Save_menu;
     /*Для открытия правильного окна (главного меню) при запуске игры*/
     private void Start()

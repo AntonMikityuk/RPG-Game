@@ -6,12 +6,17 @@ using static Text_Typer;
 
 public class Text_Typer : MonoBehaviour
 {
+    [Header("Game Window Dialogue panel")]
     public TMP_Text GameWindowDialoguePanel_text;
+    [Header("Combat Window Dialogue panel")]
     public TMP_Text CombatWindowDialoguePanel_text;
+    [Header("Text speed")]
     public float Text_speed = 0.06f;
 
+    /* орутина дл€ печати текста*/
     private Coroutine Text_typer;
 
+    /*–ежима дл€ печати текста (дл€ выбора, в какое диалоговое окно выводить текст)*/
     public enum Dialogue_Mode {Game, Combat}
 
     // ћетод дл€ запуска плавного вывода текста
@@ -35,14 +40,14 @@ public class Text_Typer : MonoBehaviour
             yield break;
         }
 
-        targetText.text = ""; // ќчищаем текст перед началом вывода
+        targetText.text = "";
 
         foreach (char letter in text)
         {
-            targetText.text += letter; // ƒобавл€ем по одной букве
-            yield return new WaitForSeconds(Text_speed); // ∆дем перед добавлением следующей буквы
+            targetText.text += letter;
+            yield return new WaitForSeconds(Text_speed);
         }
 
-        Text_typer = null; // ѕосле завершени€ обнул€ем переменную
+        Text_typer = null;
     }
 }
