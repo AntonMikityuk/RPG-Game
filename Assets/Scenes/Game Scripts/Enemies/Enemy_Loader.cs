@@ -75,7 +75,7 @@ public class EnemyLoader : MonoBehaviour
             return;
         }
         GameObject newEnemy = Instantiate(enemyPrefab, EnemySpawn_Point.position, Quaternion.identity); // Используем enemySpawnPoint.position
-        newEnemy.transform.localScale = new Vector3(45f, 45f, 30f);
+        newEnemy.transform.localScale = new Vector3(40f, 40f, 20f);
 
         Enemy_Unit enemyUnit = newEnemy.GetComponent<Enemy_Unit>();
         if (enemyUnit == null)

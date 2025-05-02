@@ -5,46 +5,16 @@
       "Event_description": "You meet wounded goblin.",
       "Event_tag": "combat",
       "Enemy_type": "goblin"
-    },
-    {
-      "Event_name": "Ambush",
-      "Event_description": "You feel someone's watching you, you realise it's an ambush!",
-      "Event_tag": "combat",
-      "Enemy_type": "slime"
-    },
-    {
-      "Event_name": "Gas trap",
-      "Event_description": "You accidentally activated the trap and poisonous gas quickly fills the room.",
-      "Event_tag": "trap",
-      "Trap_type": "gas"
-    },
-    {
-      "Event_name": "Spikes trap",
-      "Event_description": "You accidentally stepped on a hidden plate and activated spike trap.",
-      "Event_tag": "trap",
-      "Trap_type": "spikes"
     }
   ],
   "rare": [
-    {
-      "Event_name": "Fire trap",
-      "Event_description": "You feel temperature around you rises, room sets on fire.",
-      "Event_tag": "trap",
-      "Trap_type": "fire"
-    },
-    {
-      "Event_name": "Ice trap",
-      "Event_description": "You enter room covered in ice, the temperature here is freezing cold.",
-      "Event_tag": "trap",
-      "Trap_type": "ice"
-    }
   ],
   "epic": [
     {
       "Event_name": "Challenge",
       "Event_description": "You encounter massive gates, blocking your path, as you approache them you hear loud voice, challenging you to enter the room and defeat powerfull enemies.",
       "Event_tag": "combat",
-      "Enemy_type": "skeleton"
+      "Enemy_type": "slime"
     }
   ],
   "special": [
@@ -52,7 +22,7 @@
       "Event_name": "Boss",
       "Event_description": "You enter large room and see massive enemy in the middle - boss of this level.",
       "Event_tag": "combat",
-      "Enemy_type": "golem"
+      "Enemy_type": "goblin"
     }
   ]
 }
