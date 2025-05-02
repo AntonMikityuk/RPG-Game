@@ -68,6 +68,17 @@ public class Hero : MonoBehaviour
             Debug.Log($"You have taken {damage} damage from enemy hit");
     }
 
+    public void Take_TrapDamage(int damage)
+    {
+        cur_health -= Mathf.Max(0, damage);
+        if (cur_health <= 0)
+        {
+            Debug.Log("You are dead!");
+        }
+        else
+            Debug.Log($"You have taken {damage} damage from enemy hit");
+    }
+
     /*Лечение*/
     public void Heal(int heal_amount)
     {
@@ -196,5 +207,41 @@ public class Hero : MonoBehaviour
         floors = data.floor;
 
         Debug.Log($"Hero updated: Name={hero_name}, Level={level}, HP={cur_health}/{max_health}");
+    }
+
+    public bool Check_Stat(string Stat, int Requirement)
+    {
+        int Stat_Value;
+
+        switch (Stat)
+        {
+            case "strength":
+                Stat_Value = this.strength;
+                break;
+            case "dexterity":
+                Stat_Value = this.dexterity;
+                break;
+            case "intelligence":
+                Stat_Value = this.intelligence;
+                break;
+            case "luck":
+                Stat_Value = this.luck;
+                break;
+            case "attack":
+                Stat_Value = this.attack;
+                break;
+            case "defense":
+                Stat_Value = this.defense;
+                break;
+            default:
+                Debug.LogWarning($"[Hero.CheckStat] Unidentified stat: '{Stat}'");
+                return false;
+        }
+
+
+        bool Pass = Stat_Value >= Requirement;
+
+        Debug.Log($"[Hero.CheckStat] Check: {Stat} ({Stat_Value}) > {Requirement} = {Pass}");
+        return Pass;
     }
 }

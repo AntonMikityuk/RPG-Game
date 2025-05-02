@@ -10,6 +10,7 @@ public class Event
     public string Event_description;
     public string Event_tag;
     public string Enemy_type;
+    public string Trap_type;
 
     [System.NonSerialized]
     public Battle_System.Event_Tier Tier;

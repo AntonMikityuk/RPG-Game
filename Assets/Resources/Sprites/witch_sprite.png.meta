@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3b5f410de17be1b44959ddcb3e6ea5c3
+guid: 14b8b9d5bef2c934b832b87bd2ae10bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6051149900733818619
-    second: skeleton_sprite_0
+      213: -6485729540891366494
+    second: witch_sprite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skeleton_sprite_0
+      name: witch_sprite_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 35
-        width: 355
-        height: 534
+        x: 21
+        y: 0
+        width: 378
+        height: 610
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 509de14c93ff50ca0800000000000000
-      internalID: -6051149900733818619
+      spriteID: 2aba9ed685f0ef5a0800000000000000
+      internalID: -6485729540891366494
       vertices: []
       indices: 
       edges: []
