@@ -15,6 +15,8 @@ public class Event_Buttons_Changer : MonoBehaviour
     public GameObject Combat_Window;
     [Header("Combat Manager")]
     public Battle_System Combat_Manager;
+    [Header("Trap Events")]
+    public Battle_System Traps;
 
     /*Кнопки ивентов*/
     [System.Serializable]
@@ -88,6 +90,18 @@ public class Event_Buttons_Changer : MonoBehaviour
             Combat_Manager.StartBattle();
             Combat_Window.SetActive(true);
             Text_Reference.StartTyping(Events_list[index].Event_description, Text_Typer.Dialogue_Mode.Combat);
+        }
+        else if (Events_list[index].Event_tag == "trap")
+        {
+            Trap_Events Trap = FindAnyObjectByType<Trap_Events>();
+            if (Trap != null)
+            {
+                Trap.Initiate_Trap(Events_list[index].Trap_type);
+                Text_Reference.StartTyping(Events_list[index].Event_description, Text_Typer.Dialogue_Mode.Game);
+                Game_Management Manager = FindAnyObjectByType<Game_Management>();
+                if (Manager != null)
+                    Manager.Update_UI_Stats();
+            }
         }
         else
         {

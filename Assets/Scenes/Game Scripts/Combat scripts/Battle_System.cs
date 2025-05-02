@@ -39,7 +39,7 @@ public class Battle_System : MonoBehaviour
 
         if (Player_Hero == null || Enemy == null)
         {
-            Debug.LogError("Ошибка: Не найден герой или противник!");
+            Debug.LogError("Error, enemy or hero not found!");
             return;
         }
 
