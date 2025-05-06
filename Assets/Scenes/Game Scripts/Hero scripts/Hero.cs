@@ -73,6 +73,7 @@ public class Hero : MonoBehaviour
         cur_health -= Mathf.Max(0, damage);
         if (cur_health <= 0)
         {
+            cur_health = 0;
             Debug.Log("You are dead!");
         }
         else
@@ -243,5 +244,16 @@ public class Hero : MonoBehaviour
 
         Debug.Log($"[Hero.CheckStat] Check: {Stat} ({Stat_Value}) > {Requirement} = {Pass}");
         return Pass;
+    }
+    public bool Death()
+    {
+        if (cur_health <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

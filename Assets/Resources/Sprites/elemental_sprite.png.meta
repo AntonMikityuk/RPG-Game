@@ -334,7 +334,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      elemental_sprite_0: -6843720642117093252
+      elemental_sprite_1: -7371014192929263614
+      elemental_sprite_2: -6992937288691047356
+      elemental_sprite_3: -658505829741181370
+      elemental_sprite_4: -3303682275895400668
+      elemental_sprite_5: 1383100406252819166
+      elemental_sprite_6: -8312333944185943957
+      elemental_sprite_7: 132900110681041334
+      elemental_sprite_8: 2865673446486987479
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

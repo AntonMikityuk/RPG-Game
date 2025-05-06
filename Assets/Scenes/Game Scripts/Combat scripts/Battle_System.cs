@@ -236,6 +236,10 @@ public class Battle_System : MonoBehaviour
             CombatUI.Clear_DialoguePanel();
             CombatWindow_Typer.StartTyping($"You lost!", Text_Typer.Dialogue_Mode.Combat);
             yield return new WaitForSeconds(5f);
+            if (Enemy != null)
+                Destroy(Enemy.gameObject);
+            Game_Management manager = FindAnyObjectByType<Game_Management>();
+            manager.ShowGameOver_Panel();
         }
         Combat_Window.SetActive(false);
     }

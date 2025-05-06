@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -51,6 +52,7 @@ public class Game_Management : MonoBehaviour
     /*Панель меню*/
     [Header("Panels")]
     public GameObject Menu_panel;
+    public GameObject GameOver_Panel;
 
     /*Группа Canvas для блокировки*/
     [Header("Canvas Group")]
@@ -95,5 +97,23 @@ public class Game_Management : MonoBehaviour
         mana_text.text = "" + Player_hero.cur_mana + "/" + Player_hero.max_mana;
         gold_text.text = "" + Player_hero.gold;
         floor_text.text = "Floor: " + Player_hero.floors;
+    }
+
+    public void End_Game()
+    {
+        ShowGameOver_Panel();  
+    }
+    public void QuitGameOver_Panel()
+    {
+        HideGameOver_Panel();
+    }
+
+    public void ShowGameOver_Panel()
+    {
+        GameOver_Panel.SetActive(true);
+    }
+    public void HideGameOver_Panel()
+    {
+        GameOver_Panel.SetActive(false);
     }
 }

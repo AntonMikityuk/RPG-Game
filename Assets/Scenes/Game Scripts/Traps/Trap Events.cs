@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -49,21 +50,23 @@ public class Trap_Events : MonoBehaviour
         }
         CurrentTrap_Data = Traps.Trap_List[Trap_Index];
         Show_ContinueButton();
-
     }
 
-    public void Trap_Disarment()
+    private IEnumerator Disarment()
     {
         if (CurrentTrap_Data == null)
         {
             Debug.LogError("Trap data not found");
             Hide_ContinueButton();
-            return;
         }
         if (Player_hero.Check_Stat(CurrentTrap_Data.Stat_ToChek, CurrentTrap_Data.Requirement))
         {
             Debug.Log("Trap successfully disarmed");
             Typer.StartTyping($"{Player_hero.hero_name} successfully disarmed {CurrentTrap_Data.trap_name}!", Text_Typer.Dialogue_Mode.Game);
+            yield return new WaitForSeconds(5f);
+            Player_hero.floors++;
+            Game_Manager.Update_UI_Stats();
+            Event_Changer.RollNewFloor_Events();
         }
         else
         {
@@ -72,13 +75,31 @@ public class Trap_Events : MonoBehaviour
                 Debug.Log($"Failed to desarm trap, {Player_hero.hero_name} took {CurrentTrap_Data.Damage}");
                 Player_hero.Take_TrapDamage(CurrentTrap_Data.Damage);
                 Typer.StartTyping($"{Player_hero.hero_name} failed to disarm {CurrentTrap_Data.trap_name} and took {CurrentTrap_Data.Damage} damage", Text_Typer.Dialogue_Mode.Game);
+                Game_Manager.Update_UI_Stats();
+                yield return new WaitForSeconds(5f);
+                if (Player_hero.cur_health <= 0)
+                {
+                    Typer.StartTyping($"You are dead!", Text_Typer.Dialogue_Mode.Game);
+                    yield return new WaitForSeconds(3f);
+                    Game_Manager.ShowGameOver_Panel();
+                }
             }
         }
         Hide_ContinueButton();
         CurrentTrap_Data = null;
-        Player_hero.floors++;
-        Game_Manager.Update_UI_Stats();
-        Event_Changer.RollNewFloor_Events();
+    }
+
+    public void Disarm_Attempt()
+    {
+        if (CurrentTrap_Data == null)
+        {
+            Debug.LogError("No trap data to disarm. Initiate_Trap might not have been called correctly.");
+            Hide_ContinueButton();
+            return;
+        }
+        // Запускаем корутину
+        StartCoroutine(Disarment());
+        Hide_ContinueButton();
     }
 
     private void Hide_ContinueButton()
