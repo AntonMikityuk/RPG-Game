@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-
+/*
 public class Save_manager : MonoBehaviour
 {
     public static Save_manager Instance { get; private set; }
@@ -69,3 +69,4 @@ public class Save_manager : MonoBehaviour
     }
 }
 }
+*/

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+//using System;
 
 public class EnemyLoader : MonoBehaviour
 {
@@ -117,5 +118,13 @@ public class EnemyLoader : MonoBehaviour
         }
         Debug.Log("Enemy not found");
         return -1;
+    }
+
+    public int Get_RandomEnemy()
+    {
+        Debug.Log("Random Enemy search in progress");
+        int random = Random.Range(0, enemyList.Count);
+        Debug.Log($"Found enemy: name: {enemyList[random].name}");
+        return random;
     }
 }

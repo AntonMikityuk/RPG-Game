@@ -277,6 +277,12 @@ public class Battle_System : MonoBehaviour
                 if (Player_Hero.cur_exp >= Player_Hero.required_exp)
                     Player_Hero.Level_up();
                 break;
+            default:
+                Debug.Log("Encounter reward: 10 exp");
+                Player_Hero.cur_exp += 10;
+                if (Player_Hero.cur_exp >= Player_Hero.required_exp)
+                    Player_Hero.Level_up();
+                break;
         }
     }
 }

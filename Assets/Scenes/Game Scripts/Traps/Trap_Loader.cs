@@ -6,7 +6,7 @@ using System.IO;
 public class Trap_Loader : MonoBehaviour
 {
 
-    [Header("Trap List")]
+    [Header("Traps List")]
     public List<Trap_Data> Trap_List;
 
     /*«агрузка ловушек при старте*/
@@ -44,7 +44,7 @@ public class Trap_Loader : MonoBehaviour
         }
     }
 
-    // ћетод дл€ вывода списка загруженных врагов
+    // ћетод дл€ вывода списка загруженных ловушек
     private void Print_TrapList(List<Trap_Data> traps)
     {
         Debug.Log("[Trap_Loader] Loaded traps:");

@@ -25,7 +25,11 @@ public class Save_Data
     public int gold;
     public int floor;
 
-    public Save_Data(Hero hero)
+    public string Event_1ID;
+    public string Event_2ID;
+    public string Event_3ID;
+
+    public Save_Data(Hero hero, Event_Buttons_Changer changer)
     {
         heroname = hero.hero_name;
         level = hero.level;
@@ -47,5 +51,9 @@ public class Save_Data
 
         gold = hero.gold;
         floor = hero.floors;
+
+        Event_1ID = changer.Event_1.Event_name;
+        Event_2ID = changer.Event_2.Event_name;
+        Event_3ID = changer.Event_3.Event_name;
     }
 }

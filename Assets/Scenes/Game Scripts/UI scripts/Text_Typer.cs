@@ -30,6 +30,19 @@ public class Text_Typer : MonoBehaviour
         Text_typer = StartCoroutine(Type_Text(text, mode));
     }
 
+    public void Clear_DialoguePanel(Dialogue_Mode mode)
+    {
+        TMP_Text targetText = mode == Dialogue_Mode.Game ? GameWindowDialoguePanel_text : CombatWindowDialoguePanel_text;
+
+        if (targetText == null)
+        {
+            Debug.LogError("[Text_Typer] Целевая панель диалога не назначена!");
+            return;
+        }
+
+        targetText.text = "";
+    }
+
     private IEnumerator Type_Text(string text, Dialogue_Mode mode)
     {
         TMP_Text targetText = mode == Dialogue_Mode.Game ? GameWindowDialoguePanel_text : CombatWindowDialoguePanel_text;

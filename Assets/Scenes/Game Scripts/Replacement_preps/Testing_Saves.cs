@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Testing_Saves : MonoBehaviour
+/*public class Testing_Saves : MonoBehaviour
 {
     public static Testing_Saves Instance { get; private set; }
 
@@ -28,14 +28,14 @@ public class Testing_Saves : MonoBehaviour
             Debug.Log("hero not found");
             return;
         }
-    }
+    }*/
     /*Получение пути к файлу*/
-    private string Get_Path(int slot)
+   /* private string Get_Path(int slot)
     {
         return Application.persistentDataPath + $"save_slot_{slot}.dat";
-    }
+    }*/
     /*Сохранение данных в файл*/
-    public void Save_Data(Hero hero, int slot)
+    /*public void Save_Data(Hero hero, int slot)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Get_Path(slot);
@@ -46,9 +46,9 @@ public class Testing_Saves : MonoBehaviour
             formatter.Serialize(stream, data);
         }
         Debug.Log($"Save successible, slot - {slot}, path: {path}");
-    }
+    }*/
     /*Загрузка данных из файла*/
-    public Save_Data Load_Data(int slot)
+    /*public Save_Data Load_Data(int slot)
     {
         string path = Get_Path(slot);
 
@@ -76,15 +76,15 @@ public class Testing_Saves : MonoBehaviour
             Debug.LogError($"Файл сохранения отсутствует: {path}");
             return null;
         }
-    }
+    }*/
     /*Сохранение данных в слот сохранения*/
-    public void SaveTo_Slot(Hero hero, int slot)
+   /*public void SaveTo_Slot(Hero hero, int slot)
     {
         Save_Data(hero, slot);
         Debug.Log($"Game saved to slot {slot}");
-    }
+    }*/
     /*Загрузка данных из слота сохранения*/
-    public void LoadFrom_Slot(Hero hero, int slot)
+   /* public void LoadFrom_Slot(Hero hero, int slot)
     {
         Save_Data data = Load_Data(slot);
         if (data != null)
@@ -107,4 +107,4 @@ public class Testing_Saves : MonoBehaviour
             Debug.Log("Save slot empty");
         }
     }
-}
+}*/

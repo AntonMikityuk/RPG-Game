@@ -1,0 +1,67 @@
+{
+  "spells": [
+    {
+      "Spell_Name": "Fireball",
+      "Spell_Description": "Small fireball, deals 30 damage to opponent",
+      "Level": "1",
+      "Type": "damage",
+      "Amount": "30",
+      "Mana_Cost": "10",
+      "Spell_Icon": "fireball_icon"
+    },
+    {
+      "Spell_Name": "Restoration",
+      "Spell_Description": "Heal 50 hp",
+      "Level": "1",
+      "Type": "heal",
+      "Amount": "50",
+      "Mana_Cost": "25",
+      "Spell_Icon": "restoration_icon"
+    },
+    {
+      "Spell_Name": "Manastorm",
+      "Spell_Description": "Deals 100 damage to opponent",
+      "Level": "5",
+      "Type": "damage",
+      "Amount": "100",
+      "Mana_Cost": "40",
+      "Spell_Icon": "manastorm_icon"
+    },
+    {
+      "Spell_Name": "Inspiration",
+      "Spell_Description": "Restore 50 mana",
+      "Level": "1",
+      "Type": "meditation",
+      "Amount": "50",
+      "Mana_Cost": "0",
+      "Spell_Icon": "inspiration_icon"
+    },
+    {
+      "Spell_Name": "Shadow bolt",
+      "Spell_Description": "Deals 20 damage to opponent",
+      "Level": "1",
+      "Type": "damage",
+      "Amount": "20",
+      "Mana_Cost": "5",
+      "Spell_Icon": "shadowbolt_icon"
+    },
+    {
+      "Spell_Name": "Earthshatter",
+      "Spell_Description": "Deals 60 damage to opponent",
+      "Level": "3",
+      "Type": "damage",
+      "Amount": "60",
+      "Mana_Cost": "45",
+      "Spell_Icon": "earthshatter_icon"
+    },
+    {
+      "Spell_Name": "Enlightment",
+      "Spell_Description": "Restore 100 mana",
+      "Level": "10",
+      "Type": "meditation",
+      "Amount": "100",
+      "Mana_Cost": "0",
+      "Spell_Icon": "enlightment_icon"
+    }
+  ]
+}

@@ -103,4 +103,47 @@ public class Event_System : MonoBehaviour
         }
         return Event_list[Random.Range(0, Event_list.Count)];
     }
+
+    public Event GetEventByName(string eventName)
+    {
+        // 1. Проверяем входные данные
+        if (string.IsNullOrEmpty(eventName))
+        {
+            // Debug.LogWarning("GetEventByName вызван с пустым именем.");
+            return null; // Не можем найти событие без имени
+        }
+
+        // 2. Ищем последовательно во всех списках
+        Event foundEvent = FindEventInList(eventName, Common_Events);
+        if (foundEvent != null) return foundEvent;
+
+        foundEvent = FindEventInList(eventName, Rare_Events);
+        if (foundEvent != null) return foundEvent;
+
+        foundEvent = FindEventInList(eventName, Epic_Events);
+        if (foundEvent != null) return foundEvent;
+
+        foundEvent = FindEventInList(eventName, Special_Events);
+        if (foundEvent != null) return foundEvent;
+
+        // 3. Если не найдено ни в одном списке
+        Debug.LogWarning($"[Event_System] Событие с именем '{eventName}' не найдено ни в одном списке!");
+        return null;
+    }
+
+    // Вспомогательный приватный метод для поиска в конкретном списке
+    private Event FindEventInList(string eventName, List<Event> eventList)
+    {
+        if (eventList == null) return null; // Проверка на случай, если список не инициализирован
+
+        foreach (Event evt in eventList)
+        {
+            // Сравниваем имена. Убедись, что Event_name уникальны!
+            if (evt.Event_name == eventName)
+            {
+                return evt; // Нашли!
+            }
+        }
+        return null; // Не найдено в этом списке
+    }
 }

@@ -1,0 +1,20 @@
+{
+  "encounters": [
+    {
+      "Encounter_Name": "Gold pile",
+      "Encounter_Type": "reward"
+    },
+    {
+      "Encounter_Name": "Trap room",
+      "Encounter_Type": "trap"
+    },
+    {
+      "Encounter_Name": "Wandering monster",
+      "Encounter_Type": "combat"
+    },
+    {
+      "Encounter_Name": "Shrine",
+      "Encounter_Type": "restore"
+    }
+  ]
+}

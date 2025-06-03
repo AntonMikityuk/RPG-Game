@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using static Battle_System;
 
 public class Trap_Events : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class Trap_Events : MonoBehaviour
     private Hero Player_hero;
 
     private Trap_Data CurrentTrap_Data;
+
+    private Event_Tier Current_Tier;
 
     private void Awake()
     {
@@ -49,6 +52,7 @@ public class Trap_Events : MonoBehaviour
             return;
         }
         CurrentTrap_Data = Traps.Trap_List[Trap_Index];
+        Typer.StartTyping($"{Player_hero.hero_name} activated trap: {CurrentTrap_Data.trap_name}", Text_Typer.Dialogue_Mode.Game);
         Show_ContinueButton();
     }
 
@@ -82,6 +86,7 @@ public class Trap_Events : MonoBehaviour
                     Typer.StartTyping($"You are dead!", Text_Typer.Dialogue_Mode.Game);
                     yield return new WaitForSeconds(3f);
                     Game_Manager.ShowGameOver_Panel();
+                    Typer.Clear_DialoguePanel(Text_Typer.Dialogue_Mode.Game);
                 }
             }
         }
@@ -101,6 +106,34 @@ public class Trap_Events : MonoBehaviour
         StartCoroutine(Disarment());
         Hide_ContinueButton();
     }
+    public void SetCurrent_EventTier(Event_Tier tier)
+    {
+        Current_Tier = tier;
+    }
+    public void Reward()
+    {
+        switch (Current_Tier)
+        {
+            case Event_Tier.Common:
+                Debug.Log($"{Player_hero.hero_name} gained 10 exp");
+                Player_hero.cur_exp += 10;
+                if (Player_hero.cur_exp >= Player_hero.required_exp)
+                    Player_hero.Level_up();
+                break;
+            case Event_Tier.Rare:
+                Debug.Log($"{Player_hero.hero_name} gained 25 exp");
+                Player_hero.cur_exp += 25;
+                if (Player_hero.cur_exp >= Player_hero.required_exp)
+                    Player_hero.Level_up();
+                break;
+            case Event_Tier.Epic:
+                Debug.Log($"{Player_hero.hero_name} gained 50 exp");
+                Player_hero.cur_exp += 50;
+                if (Player_hero.cur_exp >= Player_hero.required_exp)
+                    Player_hero.Level_up();
+                break;
+        }
+    }
 
     private void Hide_ContinueButton()
     {
@@ -115,5 +148,12 @@ public class Trap_Events : MonoBehaviour
         {
             Continue_Button.gameObject.SetActive(true);
         }
+    }
+    public string Get_RandomTrap()
+    {
+        Debug.Log("Random Trap search in progress");
+        int random = Random.Range(0, Traps.Trap_List.Count);
+        Debug.Log($"Found trap: name: {Traps.Trap_List[random].trap_name}");
+        return Traps.Trap_List[random].trap_name;
     }
 }

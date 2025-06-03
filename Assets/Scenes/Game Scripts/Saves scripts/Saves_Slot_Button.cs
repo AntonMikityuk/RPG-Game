@@ -27,6 +27,7 @@ public class Saves_Slot_Button : MonoBehaviour
         if (Navigation_Manager.cur_mode == Navigation_Manager.Navigation_mode.Save)
         {
             menuManager.SaveTo_Slot(Slot);
+            SceneManager.UnloadSceneAsync("Main menu");
         }
         else if (Navigation_Manager.cur_mode == Navigation_Manager.Navigation_mode.Load)
         {

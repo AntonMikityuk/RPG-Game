@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Saves_Manager : MonoBehaviour
@@ -28,14 +29,15 @@ public class Saves_Manager : MonoBehaviour
         return Application.persistentDataPath + $"save_slot_{slot}.dat";
     }
     /*Сохранение данных в файл*/
-    public void Save_Data(Hero hero, int slot)
+    private void Save_Data(Hero hero, int slot)
     {
+        Event_Buttons_Changer changer = FindAnyObjectByType<Event_Buttons_Changer>();
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Get_Path(slot);
 
         using (FileStream stream = new FileStream(path, FileMode.Create))
         {
-            Save_Data data = new Save_Data(hero);
+            Save_Data data = new Save_Data(hero, changer);
             formatter.Serialize(stream, data);
         }
         Debug.Log($"Save successible, slot - {slot}, path: {path}");
@@ -91,11 +93,23 @@ public class Saves_Manager : MonoBehaviour
                 Game_Management Stats_updater = FindAnyObjectByType<Game_Management>();
                 Stats_updater.Update_UI_Stats();
                 Debug.Log($"Hero after loading: Name={Hero.Instance.hero_name}, Level={Hero.Instance.level}, HP={Hero.Instance.cur_health}/{Hero.Instance.max_health}");
+
+                Event_Buttons_Changer changer = FindAnyObjectByType<Event_Buttons_Changer>();
+                Event_System system = FindAnyObjectByType<Event_System>();
+                if (changer != null && system != null)
+                {
+                    Debug.Log("Event_Buttons_Changer and Event_System are loaded successfully, initializing events");
+                    Event Loaded_Event1 = system.GetEventByName(data.Event_1ID);
+                    Event Loaded_Event2 = system.GetEventByName(data.Event_2ID);
+                    Event Loaded_Event3 = system.GetEventByName(data.Event_3ID);
+                    Debug.Log($"Loaded events: Button 0: {Loaded_Event1.Event_name}, Button 1: {Loaded_Event2.Event_name}, Button 2: {Loaded_Event3.Event_name}");
+                    changer.Load_EventsSave(Loaded_Event1, Loaded_Event2, Loaded_Event3);
+                }
             }
             else
             {
                 Debug.LogError("Hero.Instance == null! Возможно, Hero не был загружен.");
-            }
+            }     
         }
         else
         {
